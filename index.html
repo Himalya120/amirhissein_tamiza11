@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گزارش تحلیلی و پژوهشی: بررسی مسئله کیفیت و سرعت اینترنت در ایران</title>
+    <style>
+        :root {
+            /* تم ۱: شب لاجوردی و فیروزه‌ای (Navy & Cyan) */
+            --bg-body: #0b132b;
+            --bg-surface: #1c2541;
+            --bg-card: #222f5b;
+            --bg-card-hover: #2a3b70;
+            --text-main: #f0f4f8;
+            --text-muted: #a0aec0;
+            --primary: #48cae4;
+            --primary-dark: #0096c7;
+            --accent: #f72585;
+            --border-color: #3a506b;
+            --badge-real-bg: rgba(72, 202, 228, 0.15);
+            --badge-real-text: #48cae4;
+            --badge-imag-bg: rgba(247, 37, 133, 0.15);
+            --badge-imag-text: #f72585;
+            --pro-color: #4ade80;
+            --con-color: #f87171;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            --header-bg: rgba(28, 37, 65, 0.85);
+        }
+
+        [data-theme="light-green"] {
+            /* تم ۲: سبز زیتونی، خردلی و کرم (Light Green & Cream) */
+            --bg-body: #f4f7f4;
+            --bg-surface: #ffffff;
+            --bg-card: #e9f0e8;
+            --bg-card-hover: #dce7da;
+            --text-main: #1b3022;
+            --text-muted: #526e5b;
+            --primary: #2d6a4f;
+            --primary-dark: #1b4332;
+            --accent: #d97706;
+            --border-color: #cbdad0;
+            --badge-real-bg: rgba(45, 106, 79, 0.12);
+            --badge-real-text: #1b4332;
+            --badge-imag-bg: rgba(217, 119, 6, 0.15);
+            --badge-imag-text: #b45309;
+            --pro-color: #15803d;
+            --con-color: #b91c1c;
+            --shadow: 0 8px 24px rgba(27, 48, 34, 0.08);
+            --header-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Vazirmatn", Tahoma, "B Yekan", "B Nazanin", sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding-bottom: 60px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-switcher-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: var(--shadow);
+        }
+        .theme-switcher-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 3.5rem 1rem 2.5rem 1rem;
+        }
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--badge-real-bg);
+            color: var(--primary);
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        /* Quick Nav */
+        .quick-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+        .nav-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .nav-card span.step-num {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+        .nav-card:hover {
+            border-color: var(--primary);
+            background: var(--bg-card);
+            transform: translateY(-2px);
+        }
+
+        /* Section Layout */
+        .section-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+        .step-pill {
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 8px;
+        }
+        .section-header h2 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+        }
+
+        .callout {
+            background: var(--bg-card);
+            border-right: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+        .callout.warning {
+            border-right-color: var(--accent);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .card-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .tag-real {
+            background: var(--badge-real-bg);
+            color: var(--badge-real-text);
+            border: 1px solid var(--border-color);
+        }
+        .tag-imag {
+            background: var(--badge-imag-bg);
+            color: var(--badge-imag-text);
+            border: 1px solid var(--badge-imag-text);
+        }
+
+        ul, ol {
+            padding-right: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Pros and Cons */
+        .pros-cons {
+            margin-top: 0.75rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            font-size: 0.88rem;
+        }
+        .pros-col {
+            background: rgba(74, 222, 128, 0.08);
+            border: 1px dashed var(--pro-color);
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+        .pros-col strong {
+            color: var(--pro-color);
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+        .cons-col {
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px dashed var(--con-color);
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+        .cons-col strong {
+            color: var(--con-color);
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+
+        /* Comparison Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+        th, td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: var(--bg-card);
+            color: var(--primary);
+            font-weight: 700;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Combined Plan Banner */
+        .solution-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-surface) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Metric Grid */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .metric-card .num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        .metric-card .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 1000px;
+            margin: 2rem auto 0 auto;
+        }
+
+        @media print {
+            header, .theme-switcher-btn, .quick-nav {
+                display: none !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .section-box, .card, .callout, table {
+                border-color: #cccccc !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+            }
+            .step-pill {
+                background: #000000 !important;
+                color: #ffffff !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-title">
+            <span>🌐</span>
+            <span>پژوهش کیفیت اینترنت در ایران</span>
+        </div>
+        <button id="themeToggle" class="theme-switcher-btn" aria-label="تغییر تم رنگی">
+            <span id="themeIcon">🌓</span>
+            <span id="themeLabel">تم: لاجوردی مدرن</span>
+        </button>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge">چارچوب شش‌مرحله‌ای حل مسئله پژوهشی</div>
+            <h1>تحلیل و بررسی چالش‌های کیفیت و سرعت اینترنت</h1>
+            <p>
+                یک بررسی ساختاریافته پیرامون ابعاد فنی، اقتصادی و مدیریتی شبکه اینترنت، به همراه ایده‌پردازی واقع‌بینانه و خلاقانه، ارزیابی مزایا/معایب و تعیین شاخص‌های هدف‌گذاری‌شده.
+            </p>
+        </section>
+
+        <!-- Navigation Cards -->
+        <nav class="quick-nav" aria-label="ناوبری مراحل شش‌گانه">
+            <a href="#step1" class="nav-card">
+                <span class="step-num">مرحله ۱</span>
+                <span>تعریف نیاز</span>
+            </a>
+            <a href="#step2" class="nav-card">
+                <span class="step-num">مرحله ۲</span>
+                <span>جمع‌آوری داده</span>
+            </a>
+            <a href="#step3" class="nav-card">
+                <span class="step-num">مرحله ۳</span>
+                <span>یافتن راه‌حل‌ها</span>
+            </a>
+            <a href="#step4" class="nav-card">
+                <span class="step-num">مرحله ۴</span>
+                <span>ارزیابی سود و زیان</span>
+            </a>
+            <a href="#step5" class="nav-card">
+                <span class="step-num">مرحله ۵</span>
+                <span>طرح ترکیبی واقع‌بینانه</span>
+            </a>
+            <a href="#step6" class="nav-card">
+                <span class="step-num">مرحله ۶</span>
+                <span>ارزیابی و شاخص‌ها</span>
+            </a>
+        </nav>
+
+        <!-- Step 1: Need Definition -->
+        <section id="step1" class="section-box">
+            <div class="section-header">
+                <span class="step-pill">مرحله ۱</span>
+                <h2>تعریف دقیق نیاز و مسئله (Problem Definition)</h2>
+            </div>
+            <p>
+                نیاز اصلی، دسترسی کاربران خانگی، تجاری و پژوهشی به اینترنتی با سرعت بالا، تأخیر (پینگ) پایین، پایداری مستمر و هزینه متناسب است. اختلال و افت کیفیت در سال‌های اخیر اثرات مستقیمی بر اقتصاد دیجیتال، آموزش آنلاین و کارایی کسب‌وکارها گذاشته است.
+            </p>
+            <div class="callout warning" style="margin-top: 1rem;">
+                <strong>پرسش کلیدی پژوهش:</strong> چه عواملی (فنی، زیرساختی یا مدیریتی) موجب ناپایداری و افت کیفیت شده‌اند و چگونه می‌توان با رویکردی مهندسی و مرحله‌به‌مرحله به سمت بهبود وضعیت حرکت کرد؟
+            </div>
+        </section>
+
+        <!-- Step 2: Information Gathering & Factors to Investigate -->
+        <section id="step2" class="section-box">
+            <div class="section-header">
+                <span class="step-pill">مرحله ۲</span>
+                <h2>جمع‌آوری اطلاعات و فرضیه‌های قابل بررسی (Information Gathering)</h2>
+            </div>
+            <p>
+                در بررسی علمی مسئله، به‌جای پیش‌فرض‌های قطعی، عوامل زیر به عنوان حوزه‌های مطالعاتی و فرضیه‌های فنی در دست تحقیق قرار دارند:
+            </p>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>زیرساخت دسترسی ثابت و فیبرنوری</h3>
+                    <p class="text-muted">بررسی سهم بالای خطوط مسی فرسوده (ADSL) در مقایسه با استاندارد جهانی و نیاز به تسریع در اجرای پروژه ملی FTTH/FTTC برای کاهش بار شبکه همراه.</p>
+                </div>
+                <div class="card">
+                    <h3>ظرفیت پهنای باند بین‌الملل و گیت‌وی‌ها</h3>
+                    <p class="text-muted">بررسی فرضیه محدودیت ورودی‌های بین‌المللی، تنوع مسیرهای ورودی کابل‌های دریایی/زمینی و میزان افزونگی (Redundancy) در هنگام قطعی‌های منطقه‌ای.</p>
+                </div>
+                <div class="card">
+                    <h3>مدیریت ترافیک و سامانه‌های فیلترینگ</h3>
+                    <p class="text-muted">بررسی تأثیر تجهیزات میانی بازرسی عمیق بسته‌ها (DPI) و لایه‌های پالایش بر افزایش پینگ، از دست رفتن بسته‌ها (Packet Loss) و مصرف پهنای باند توسط پروتکل‌های رمزگذاری/VPN.</p>
+                </div>
+                <div class="card">
+                    <h3>اقتصاد تعرفه‌گذاری و سرمایه‌گذاری بخش خصوصی</h3>
+                    <p class="text-muted">مطالعه مدل‌های اقتصادی اپراتورها، بازگشت سرمایه در زیرساخت‌های نوین، و امکان جذب مشارکت بخش خصوصی در پروژه‌های توسعه لایه انتقال.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: Finding Solutions -->
+        <section id="step3" class="section-box">
+            <div class="section-header">
+                <span class="step-pill">مرحله ۳</span>
+                <h2>پیدا کردن راه‌حل‌ها (Brainstorming & Solution Discovery)</h2>
+            </div>
+            <p>در این بخش، طیفی از راهکارهای عملیاتی در کنار ایده‌های خلاقانه/آینده‌نگرانه دسته‌بندی شده‌اند:</p>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>
+                        <span>۱. نوسازی شبکه ثابت (FTTx)</span>
+                        <span class="card-tag tag-real">واقع‌بینانه</span>
+                    </h3>
+                    <p>انتقال پایدار بار ترافیکی از شبکه‌های سلولی (۴G/۵G) به سمت فیبر نوری پرسرعت برای مشترکین ثابت و ادارات.</p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <span>۲. بازنگری در سیاست‌های پالایش و DPI</span>
+                        <span class="card-tag tag-real">واقع‌بینانه</span>
+                    </h3>
+                    <p>شفاف‌سازی و بهینه‌سازی فنی تجهیزات مسیربندی ترافیک برای کاهش تأخیر پردازشی و رفع اختلالات ناخواسته شبکه.</p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <span>۳. آزادسازی فرکانس‌های طلایی (۷۰۰/۸۰۰ MHz)</span>
+                        <span class="card-tag tag-real">واقع‌بینانه</span>
+                    </h3>
+                    <p>تخصیص باندهای فرکانسی پایین به اپراتورهای موبایل جهت بهبود چشمگیر پوشش‌دهی داخلی و افزایش پایداری سیگنال.</p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <span>۴. استقرار بالون‌ها و پلتفرم‌های پرارتفاع (HAPS)</span>
+                        <span class="card-tag tag-imag">تخیلی / آینده‌نگر</span>
+                    </h3>
+                    <p>استفاده از ایستگاه‌های ارتفاع‌بالا در استراتوسفر برای توزیع اینترنت پرسرعت در پهنه‌های کویری و کوهستانی کشور.</p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <span>۵. منظومه‌های ماهواره‌ای مدار پایین بومی</span>
+                        <span class="card-tag tag-imag">تخیلی / بلندمدت</span>
+                    </h3>
+                    <p>طراحی و پرتاب منظومه ماهواره‌های مخابراتی LEO مستقل جهت توزیع مستقیم اینترنت به نقاط دورافتاده و پدافند غیرعامل.</p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <span>۶. مراکز تبادل داده توزیع‌شده با CDN هوشمند</span>
+                        <span class="card-tag tag-real">واقع‌بینانه</span>
+                    </h3>
+                    <p>توسعه قطب‌های داده استانی و ایجاد مسیرهای مستقیم میان‌اپراتوری (IXP) جهت جلوگیری از ارجاع ترافیک به مرکز.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 4: Pros and Cons Evaluation -->
+        <section id="step4" class="section-box">
+            <div class="section-header">
+                <span class="step-pill">مرحله ۴</span>
+                <h2>ارزیابی سود و زیان راه‌حل‌ها (Pros & Cons)</h2>
+            </div>
+            <p>بررسی موشکافانه نقاط قوت، هزینه‌ها و چالش‌های هر گزینه برای امکان‌سنجی تصمیم‌گیری:</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>راه‌حل</th>
+                            <th>نوع</th>
+                            <th>مزایا (نقاط قوت)</th>
+                            <th>معایب و چالش‌ها</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>توسعه شبکه فیبرنوری (FTTH)</strong></td>
+                            <td><span class="card-tag tag-real">واقعی</span></td>
+                            <td>سرعت بسیار بالا و پایدار، پینگ تک‌رقمی، رفع افت کیفیت بار شبکه موبایل</td>
+                            <td>هزینه عمرانی بالا (حفاری)، زمان‌بر بودن بازگشت سرمایه، پیچیدگی مجوزهای شهری</td>
+                        </tr>
+                        <tr>
+                            <td><strong>بهینه‌سازی لایه پالایش و مدیریت ترافیک</strong></td>
+                            <td><span class="card-tag tag-real">واقعی</span></td>
+                            <td>کاهش فوری Packet Loss، رفع بار سربار VPNها، بهبود چشمگیر تجربه کاربری</td>
+                            <td>نیازمند همگرایی نهادهای قانون‌گذار و سیاست‌گذار و توافق‌های چندبخشی</td>
+                        </tr>
+                        <tr>
+                            <td><strong>تخصیص فرکانس‌های ۷۰۰/۸۰۰ MHz</strong></td>
+                            <td><span class="card-tag tag-real">واقعی</span></td>
+                            <td>افزایش پوشش با تعداد دکل کمتر، صرفه‌جویی سرمایه‌ای اپراتورها</td>
+                            <td>نیازمند هماهنگی میان‌دستگاهی برای تخلیه باند از پخش همگانی تلویزیونی</td>
+                        </tr>
+                        <tr>
+                            <td><strong>اینترنت بالونی و پلتفرم‌های HAPS</strong></td>
+                            <td><span class="card-tag tag-imag">تخیلی/خاص</span></td>
+                            <td>پوشش سریع نقاط بحران‌زده و روستاهای کوهستانی بدون نیاز به جاده‌کشی</td>
+                            <td>آسیب‌پذیری شدید در برابر شرایط نامساعد جوی، هزینه نگهداری مداوم، پایداری محدود</td>
+                        </tr>
+                        <tr>
+                            <td><strong>منظومه ماهواره‌ای LEO بومی</strong></td>
+                            <td><span class="card-tag tag-imag">تخیلی/بلندمدت</span></td>
+                            <td>پوشش سراسری بدون وابستگی به مرزهای خاکی، پدافند غیرعامل قوی</td>
+                            <td>نیاز به فناوری فضایی بسیار پیشرفته و سرمایه‌گذاری میلیارد دلاری کلان</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Step 5: Choosing a Realistic Combined Plan -->
+        <section id="step5" class="section-box">
+            <div class="section-header">
+                <span class="step-pill">مرحله ۵</span>
+                <h2>انتخاب طرح ترکیبی واقع‌بینانه (Actionable Roadmap)</h2>
+            </div>
+            <p>
+                بهترین نتیجه با اتکا به یک راه‌حل منفرد به دست نمی‌آید، بلکه برآیند یک «طرح اقدام سه‌گانه همگام» است:
+            </p>
+
+            <div class="solution-box">
+                <h3 style="color: var(--primary); margin-bottom: 0.75rem; font-size: 1.2rem;">پکیج جامع ارتقای کیفیت شبکه (طرح پیشنهادی):</h3>
+                <ol>
+                    <li><strong>محور زیرساخت فیزیکی (کوتاه‌مدت و میان‌مدت):</strong> تمرکز سرمایه روی اتصال اماکن تجاری و پرتراکم به فیبر نوری با مدل تسهیلات شهرداری و آزادسازی باندهای رادیویی فرکانس پایین.</li>
+                    <li><strong>محور معماری شبکه و لایه میانی:</strong> بهینه‌سازی فرآیندهای بازرسی بسته، تنوع‌بخشی به گیت‌وی‌های بین‌الملل و استانداردسازی ارتباطات IXP جهت کاهش رفت‌وبرگشت بسته‌های داخلی.</li>
+                    <li><strong>محور اقتصاد و مشوق‌های توسعه:</strong> اصلاح ساختار تعرفه به صورت شفاف و مدل‌های حمایتی برای ارائه‌دهندگان اینترنت ثابت خصوصی (FCP).</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Step 6: Feedback and Evaluation Metrics -->
+        <section id="step6" class="section-box">
+            <div class="section-header">
+                <span class="step-pill">مرحله ۶</span>
+                <h2>ارزیابی، بازخورد و اهداف پیشنهادی (Evaluation & Proposed Targets)</h2>
+            </div>
+            <p>
+                برای بررسی میزان اثربخشی راهکارهای پیشنهادی، شاخص‌های زیر به عنوان <strong>اهداف پژوهشی پیشنهادی (Proposed Targets)</strong> جهت سنجش دوره‌ای پیشنهاد می‌شوند:
+            </p>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="num">&gt; ۵۰ Mbps</div>
+                    <div class="label">میانگین سرعت پیشنهادی دانلود ثابت (FTTx)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="num">&lt; ۴۰ ms</div>
+                    <div class="label">تأخیر (پینگ) هدف به سرورهای منطقه</div>
+                </div>
+                <div class="metric-card">
+                    <div class="num">&lt; ۰.۵ ٪</div>
+                    <div class="label">میزان اتلاف بسته (Packet Loss) هدف</div>
+                </div>
+                <div class="metric-card">
+                    <div class="num">۹۹.۹ ٪</div>
+                    <div class="label">پایداری دسترسی (Uptime) سالانه مشترکین</div>
+                </div>
+            </div>
+
+            <div class="callout" style="margin-top: 1.5rem;">
+                <strong>حلقه بازخورد مستمر (Feedback Loop):</strong> داده‌های کیفیت شبکه باید از طریق پلتفرم‌های اندازه‌گیری شفاف (Crowdsourced Speedtest & RIPE Atlas) جمع‌آوری و به صورت ماهانه برای هدایت سرمایه‌گذاری و رفع گلوگاه‌های منطقه‌ای بازبینی شوند.
+            </div>
+        </section>
+
+        <footer>
+            <p>پروژه پژوهشی تحلیل کیفیت شبکه اینترنت | طراحی شده بر اساس متدولوژی ۶ مرحله‌ای حل مسئله</p>
+            <p style="margin-top: 0.35rem; font-size: 0.8rem; opacity: 0.8;">بدون وابستگی خارجی • پشتیبانی کامل از زبان فارسی و راست‌چین • نسخه کاملاً مستقل و قابل پرینت</p>
+        </footer>
+    </main>
+
+    <script>
+        (function() {
+            const toggleBtn = document.getElementById('themeToggle');
+            const themeLabel = document.getElementById('themeLabel');
+            const themeIcon = document.getElementById('themeIcon');
+            const root = document.documentElement;
+
+            const THEME_DARK = 'dark-navy';
+            const THEME_LIGHT = 'light-green';
+
+            function applyTheme(theme) {
+                if (theme === THEME_LIGHT) {
+                    root.setAttribute('data-theme', 'light-green');
+                    themeLabel.textContent = 'تم: سبز و کرم روشن';
+                    themeIcon.textContent = '🌿';
+                } else {
+                    root.removeAttribute('data-theme');
+                    themeLabel.textContent = 'تم: لاجوردی مدرن';
+                    themeIcon.textContent = '🌓';
+                }
+            }
+
+            // Init from localStorage if available
+            let savedTheme = null;
+            try {
+                savedTheme = localStorage.getItem('research_site_theme');
+            } catch (e) {
+                console.warn('LocalStorage not accessible', e);
+            }
+
+            const currentTheme = savedTheme || THEME_DARK;
+            applyTheme(currentTheme);
+
+            toggleBtn.addEventListener('click', function() {
+                const isLight = root.getAttribute('data-theme') === 'light-green';
+                const newTheme = isLight ? THEME_DARK : THEME_LIGHT;
+                applyTheme(newTheme);
+                try {
+                    localStorage.setItem('research_site_theme', newTheme);
+                } catch (e) {
+                    console.warn('Cannot save to localStorage', e);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
